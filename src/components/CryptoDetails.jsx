@@ -29,7 +29,7 @@ export default function CryptoDetails() {
     coinId,
     timePeriod,
   });
-  console.log(data);
+  //console.log(data);
   const cryptoDetails = data?.data?.coin;
   if (isFetching) return "Loading ...";
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
@@ -43,7 +43,9 @@ export default function CryptoDetails() {
     { title: "Rank", value: cryptoDetails?.rank, icon: <NumberOutlined /> },
     {
       title: "24h Volume",
-      value: `$ ${cryptoDetails.volume && millify(cryptoDetails?.volume)}`,
+      value: `$ ${
+        cryptoDetails["24hVolume"] && millify(cryptoDetails["24hVolume"])
+      }`,
       icon: <ThunderboltOutlined />,
     },
     {
@@ -105,10 +107,10 @@ export default function CryptoDetails() {
         <Title level={2} className="coin-name">
           {data?.data?.coin.name} ({data?.data?.coin.symbol}) Price
         </Title>
-        {/* <p>
+        <p>
           {cryptoDetails.name} live price in US dollars. View value statistics,
           market cap and supply.
-        </p> */}
+        </p>
       </Col>
       <Select
         defaultValue="7d"
@@ -125,7 +127,7 @@ export default function CryptoDetails() {
         currentPrice={millify(data?.data?.coin.price)}
         coinName={data?.data?.coin.name}
       />
-      {/* <Col className="stats-container">
+      <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
             <Title level={3} className="coin-details-heading">
@@ -183,7 +185,7 @@ export default function CryptoDetails() {
             </Row>
           ))}
         </Col>
-      </Col> */}
+      </Col>
     </Col>
   );
 }
